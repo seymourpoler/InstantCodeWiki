@@ -1,0 +1,8 @@
+syntax: glob
+.settings/*
+casperjs/*
+node_modules/*
+static/v_*
+venv/*
+.git/*
+static/img/*
