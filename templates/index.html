@@ -1,0 +1,148 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="/static/<%= version %>/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="/static/<%= version %>/style.css"/>
+<link rel="shortcut icon" href="/static/favicon.ico" />
+<title>Instant Code Wiki | <%= team %> </title>
+
+<script type="text/javascript" src="/static/<%= version %>/lib/jquery-1.7.1.min.js">
+</script>
+<script type="text/javascript" src="/socket.io/socket.io.js">
+</script>
+<script type="text/javascript" 
+    src="/static/<%= version %>/lib/jquery-ui-1.8.24.custom.min.js">
+</script>
+<script type="text/javascript" 
+  src="/static/<%= version %>/lib/jquery-datatables.min.js">
+</script>
+<script type="text/javascript" src="/static/<%= version %>/lib/underscore-min.js">
+</script>
+
+<script type="text/javascript" src="/static/<%= version %>/lib/backbone-min.js">
+</script>
+  
+<script type="text/javascript" src="/static/<%= version %>/lib/visibility.js">
+</script>
+<script type="text/javascript" src="/static/<%= version %>/lib/jquery-idle-min.js">
+</script>
+<script type="text/javascript" src="/static/<%= version %>/lib/ace.js"></script>
+
+  <script type="text/javascript" src="/static/<%= version %>/lib/sOn-0.1.0.js"></script>
+  <script type="text/javascript" src="/static/<%= version %>/app/common.js"></script>
+  <script type="text/javascript" src="/static/<%= version %>/app/widgets.js"></script>
+  <script type="text/javascript" src="/static/<%= version %>/app/clock.js"></script>
+  <script type="text/javascript" src="/static/<%= version %>/app/chat.js"></script>    
+  <script type="text/javascript" src="/static/<%= version %>/app/services.js"></script>
+  <script type="text/javascript" src="/static/<%= version %>/app/factory.js"></script>    
+  <script type="text/javascript" src="/static/<%= version %>/app/startup.js"></script>    
+  <script>
+     function maximizeOrRestore(){
+         var sharedCodeWidget = $('#teamChat');
+         var width = '880px', height = '447px';
+         var isMaximized = sharedCodeWidget.css('position') === "fixed";
+         if (isMaximized){
+            restore(sharedCodeWidget);
+         }
+         else{
+            maximize(sharedCodeWidget);
+         }
+
+         function maximize (sharedCodeWidget){
+            sharedCodeWidget.css('top', "0px");
+            sharedCodeWidget.css('left', "0px");
+            sharedCodeWidget.css('bottom', "0px");
+            sharedCodeWidget.css('right', "0px");
+            sharedCodeWidget.css('width', '97%');
+            sharedCodeWidget.css('position', 'fixed');
+         };
+
+         function restore (sharedCodeWidget){
+            sharedCodeWidget.css('top', 'auto');
+            sharedCodeWidget.css('left', 'auto');
+            sharedCodeWidget.css('bottom', 'auto');
+            sharedCodeWidget.css('right', 'auto');
+            sharedCodeWidget.css('float', 'right');
+            sharedCodeWidget.css('width', '77%');
+            sharedCodeWidget.css('position', 'relative');
+         };
+     };
+  </script>
+
+</head>
+
+<body>
+
+<div class="row header">
+   <div class="span5 appTitle">
+     <img src="/static/<%= version %>/img/logo_small.png"/> <span> Instant Code Wiki </span>
+   </div>
+   <div class="slogan appTitle">
+   </div>
+   <div style="float: right; padding-right: 10px;">
+    <span style="margin-right: 30px; color:#555;">Logged as: 
+      <b> <%= user %> </b> in <%= team %> workshop</span> 
+  </div>
+  <br>
+</div>
+
+<div id="main" class="">
+    <div id="notificationDialog" class="modal" style="width: 600; height: 200; z-index: 1000; display:none; overflow: hidden;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color: #f1f1f1;">
+                  <button type="button" id="closeDialog" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h3 class="modal-title">Connection information</h3>
+                </div>
+                <div class="modal-body" style="overflow:hidden; font-size: 17px;">
+                  <p id="dialog-message">
+                  </p>
+                  <p><!--
+                    <img src="http://www.barchart.com/shared/images/progress_bar.gif"/>
+                    -->
+                  </p>
+                </div>
+                <div class="modal-footer">
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div style="float:left; width: 15%; margin-left: 2rem;">
+          <div id="teamMonitor" class="alert alert-info draggable-panel">
+            <i class="icon-move"></i>
+            <b>Online Colleagues</b>
+            <hr/>
+            <div id="teamViewer" class="teamViewer">
+            </div>
+          </div>
+          <div id="resourcesPanel" class="alert alert-info draggable-panel" style="">
+              <b>Shared links</b>
+                   <hr/>
+                   Description: <input type="text" id="linkDesc" placeholder="Software Craftsmanship Book" class="whole-team-input"/>
+                   Url:<br/> 
+                   <input type="text" id="linkUrl" placeholder="http://leanpub.com/socra" style="width: 6.5rem; display: inline-block;"/>
+                      <button class="btn" style="width: 2rem;" id="linkSubmit"/>
+                          <i class="icon-circle-arrow-down"></i> 
+                      </button>
+                   <hr/>
+                   <div>
+                        <ul id="sharedLinks" class="sharedLinks">
+                           
+                        </ul>
+                   </div>
+                   </div>
+          </div>
+    </div>
+    <div id="teamChat" class="alert alert-info" style="float:right; width: 77%; margin-right: 1rem;">
+      <i class="icon-fullscreen" style="float:right; cursor: pointer;" onclick="maximizeOrRestore();"></i>&nbsp; &nbsp; 
+
+       <b>Shared code</b>
+       <hr/>
+       <textarea id="wholeTeamChatInput" placeholder="Paste or type your source code here" class="whole-team-input"></textarea>
+       <hr/>
+       <div id="wholeTeamChat" class="whole-team-chat"></div>
+    </div>
+</div>
+</body>
+</html>

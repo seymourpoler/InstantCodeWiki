@@ -1,0 +1,22 @@
+{
+  "name": "workshopShare",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "*",
+    "express": "3.4.0",
+    "karma": "*",
+    "karma-chrome-launcher": "*",
+    "karma-jasmine": "*",
+    "npm": "^6.11.3",
+    "redis-url": "0.1.0",
+    "socket.io": "0.9.11"
+  },
+  "engines": {
+    "node": "0.8.12",
+    "npm": "1.1.65"
+  }
+}

@@ -1,0 +1,83 @@
+<html>
+<head>
+
+<title>Socrates UK - Instant Code Wiki</title>
+<link rel="stylesheet" type="text/css" href="/static/<%= version %>/bootstrap.css"/>
+<link rel="shortcut icon" href="/static/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="/static/<%= version %>/style.css"/>
+<script type="text/javascript" src="/static/<%= version %>/lib/jquery-1.7.1.min.js">
+</script>
+<script type="text/javascript" src="/static/<%= version %>/lib/jquery.validate.min.js">
+</script>
+
+<script type="text/javascript">
+var openApp = function(form){
+	var team = "socratesuk";
+	var user = $("#userNameText").val();
+	if (user.length < 2){
+		alert('Please type your username');
+		return false;
+	};
+	var url = window.location.href + "/" + team + "/" + user;
+	url = url.replace(/\/\//g, "/");
+	url = url.replace("http:/", "http://");
+	url = url.replace("https:/", "https://");
+	url = url.replace(" ", "");
+	window.location.href = url;
+	return false;
+};
+
+$('document').ready(function(){
+	$("#loginForm").validate({ submitHandler: openApp});
+});
+
+</script>
+
+
+</head>
+<body>
+
+<div class="row">
+
+<div class="hero-unit" style="height: 70%">
+ <div style="float: left; width: 95%;">
+  <h1>Instant Code Wiki</h1>
+  <h2>&nbsp; &nbsp; &nbsp; &nbsp; Socrates UK</h2>
+ 
+	<div style="float:left; margin-left: 80px; margin-top: 20px;">
+     <img src="http://socratesuk.org/img/SoCraTes_UK.png"/>
+  </div>
+  <div style="float: right; padding-top: 10px;">
+			<form id="loginForm" method="get" action="">
+			<fieldset>
+			  <legend>Join now</legend>
+			  <p><img src="/static/<%= version %>/img/tick.png"/>No registration required.</p>
+			  <p></p>
+			  <div style="padding-left: 1%; padding-top: 10px; padding-bottom: 15px;">
+        <br/>
+			  <label for="userNameText" style="padding-left: 5px; display: inline-block; color: #000; font-size: 15px;">Your name or twitter handle (i.e @carlosble):</label>
+			  <input id="userNameText" type="text" class="required" minlength="2">
+        <br/>
+			  <input type="submit" class="btn" value="Join!"></input>
+			  </div>
+			</fieldset>
+			</form>
+  </div>
+</div>
+ <div class="span11" style="margin-top: 30px; margin-left: 50px;">
+   <p>Hello! This is a networking and collaboration tool
+      to share code snippets instantly.</p>
+   <p>You can send chat messages to the whole group or individual direct messages</p>
+
+   <p>Thanks for joining us :-)</p>
+ 
+ </div>
+</div>
+<p style="margin-left: 100px">
+This tool has been carefully crafted by Carlos Ble, find the source code here:
+http://www.bitbucket.org/carlosble/instantCodeWiki
+</p>
+</div>
+</body>
+
+</html>
