@@ -15,3 +15,5 @@ It's possible to chat one to one or to share code with everyone in the room.
 Open the browser and go to http://localhost:3000/static/test/unitTests.html
 
 
+Authors:
+  [carlos Blé Jurado](https://github.com/carlosble)
