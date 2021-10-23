@@ -16,4 +16,4 @@ Open the browser and go to http://localhost:3000/static/test/unitTests.html
 
 
 # Authors:
-- [carlos Blé Jurado](https://github.com/carlosble)
+- [Carlos Blé Jurado](https://github.com/carlosble)
